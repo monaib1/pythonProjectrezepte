@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rezept hochladen</title>
+
+</head>
+<body>
+
+{% block content %}
+    <h1><span>Neues Rezept</span> hochladen</h1>
+
+    <div class="download_container">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <p><button type="submit" class="download_btn">Hochladen</button></p>
+
+    </form>
+
+</div>
+
+{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kategorien</title>
+</head>
+<body>
+
+<ul>
+
+     {% for category in categories %}
+      <!--- alle vorhandenen kategorieren werden durchlaufen und angezeigt + klickbar --->
+      <div class="category_container">
+          <a href="{%  url 'category' category.name %}"><li>{{ category.name }}</li></a>
+      </div>
+  {% endfor %}
+
+</ul>
+
+</body>
+</html>

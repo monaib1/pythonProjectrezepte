@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<ul>
+
+
+{% for recipe in recipes %}
+    <li>
+        <td><a href="{%  url 'recipe' recipe.pk %}">{{ recipe.title }}
+        <br>
+        <img src="{{ recipe.image.url }}"><br>
+    </li>
+{% endfor %}
+ </ul>
+</body>
+</html>

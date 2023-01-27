@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Startseite</title>
+    <style>
+        /*** Allgemein ***/
+* {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+    color: #484747;
+    margin: 0px;
+    padding: 0px;
+}
+ ul {
+    list-style: none;
+}
+h3 {
+    font-size: 26px;
+    font-weight: 600;
+}
+
+/*** Struktur ***/
+.navbar {
+    height: 80px;
+}
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+
+.header {
+    height: 350px;
+    width: 100%;
+    background-image:
+            url(media/header1.jpg);
+    background-size: cover;
+
+}
+
+/*** Speziell ***/
+/* Nav */
+#logo {
+    width: 40px;
+    margin: 20px;
+    float: left;
+}
+.nav li {
+    display: inline-block;
+    font-size: 14px;
+    margin-top: 30px;
+}
+.nav li a {
+    text-decoration: none;
+    padding: 30px 15px;
+}
+.nav li {
+    display: inline-block;
+    font-size: 14px;
+    margin-top: 30px;
+}
+.nav li a {
+    text-decoration: none;
+    padding: 30px 15px;
+}
+
+.search{
+         border-right-width: 390px;
+         border-bottom-width: 30px;
+
+
+     }
+.search_icon{
+        height: 45px;
+        background-color: rgb(0,0,0,0.5);
+        width: 60px;
+    }
+/*#search input[type=text] {
+    width: 750px;
+    font-size: 20px;
+    padding: 24.5px 0px;
+    border: none;
+    margin: 20px;
+    }*/
+.search_btn{
+
+        background-color: rgb(0,0,0,0);
+        font-size: 160px;
+        width: 75px;
+        border: none;
+
+    }
+.searchbar{
+       margin-top: 40px;
+        background-color: rgb(0,0,0,0);
+  }
+.search input[type=text] {
+    width: 650px;
+    font-size: 20px;
+    padding: 24.5px 0px;
+    border: rgb(0,0,0,0);
+}
+.search input[type=submit] {
+    width: 90px;
+    margin: 12.5px;
+    height: 50px;
+    background-color: rgb(0,0,0,0);
+    color: black;
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-weight: 300;
+    border-radius: 5px;
+    float: right;
+}
+    .rezepte li {
+
+    display: inline-block;
+    background-color: white;
+    font-size: 14px;
+    margin-top: 30px;
+    box-shadow: 0px 0px 20px #484747;
+
+}
+.rezepte li a {
+    text-decoration: none;
+    padding: 30px 15px;
+}
+.Nrezept li {
+
+    display: inline-block;
+    background-color: white;
+    font-size: 14px;
+    margin-top: 30px;
+    box-shadow: 0px 0px 20px #484747;
+
+}
+.Nrezept li a {
+    text-decoration: none;
+    padding: 30px 15px;
+}
+ul {
+    display: block;
+    text-align: center;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 50px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+    </style>
+</head>
+<body>
+
+{% block content %}
+
+  <div class="navbar">
+
+
+            <div class="left">
+                <a href="#"> <img src="media/1680.png" id="logo" width="70px"></a>
+            </div>
+
+    <div class="right">
+        <ul class="nav">
+              <li><a href="#">Registrieren</a></li>
+              <li><a href="#">Log-in</a></li>
+              <li ><a href="{% url 'about' %}">Über Uns</a></li>
+        </ul>
+    </div>
+  </div>
+{% endblock %}
+<div class="header">
+      <div class="search">
+            <div>
+               <div class="searchbar">
+                   <ul>
+                     <form class="d-flex" method="POST" action="{% url 'search' %}">
+                          {% csrf_token %}
+                        <input class="search" type="text" placeholder="Suche nach Rezepten..." aria-label="search" name="searched">
+                        <button class="search_btn" type="submit"><img src="/media/search.png" class="search_icon"></button>
+                     </form>
+                   </ul>
+
+                </div>
+            </div>
+
+      </div>
+    <div class="rezepte">
+                     <ul>
+                         <li> <a href="{% url 'recipe_a_z' %}">Rezepte A-Z</a></li>
+                         <li> <a href="{% url 'category' %}">Rezepte nach Kategorie</a></li>
+                     </ul>
+                   </div>
+</div>
+<hr>
+
+    <br>
+{% for recipe in recipes %}
+   <ul>
+      <li>
+          <img src="{{ recipe.image.url }}" alt="" width="700px" > <br>
+
+        <td><a href="{%  url 'recipe' recipe.pk %}">{{ recipe.title }}</a>
+        <br>
+     </li>
+   </ul>
+{% endfor %}
+
+
+    <nav>
+        <ul class="Nrezept">
+     <li> <a href="{% url 'upload' %}">Neues Rezept hochladen</a></li>
+        </ul>
+    </nav>
+<br>
+<hr>
+<br>
+
+        <div class="container">
+            <div class="footer clearleft">
+                <div class="row">
+                    <div class="col-quarter">
+                        <form id="settings">
+                            <select>
+                                <option value="Deutsch">Deutsch</option>
+                                <option value="English">English</option>
+                            </select>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+</html>
